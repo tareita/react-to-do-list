@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const [text, setText] = useState("");
+  let counter = 0;
+
+  function handleChange(e) {
+    const inputText = e.target.value;
+    setText(inputText);
+  }
+
+  function handleClick() {
+    const task = { text: text, id: counter, editing: false };
+    counter++;
+    setText("");
+    setTasks([...tasks, task]);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 class="title"> To do list </h1>
+
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>{task.text}</li>
+        ))}
+      </ul>
+
+      <div>
+        <div> Add to list: </div>
+        <input type="text" onChange={handleChange} value={text} />
+        <button onClick={handleClick}> Add </button>
+      </div>
     </div>
   );
 }
