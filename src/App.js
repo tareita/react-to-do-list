@@ -11,11 +11,16 @@ function App() {
     setText(inputText);
   }
 
-  function handleClick() {
+  function handleAdd() {
     const task = { text: text, id: counter, editing: false };
     counter++;
     setText("");
     setTasks([...tasks, task]);
+  }
+
+  function handleDelete(id) {
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
   }
 
   return (
@@ -24,14 +29,17 @@ function App() {
 
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>{task.text}</li>
+          <li key={index}>
+            {task.text}
+            <button onClick={() => handleDelete(task.id)}> X </button>
+          </li>
         ))}
       </ul>
 
       <div>
         <div> Add to list: </div>
         <input type="text" onChange={handleChange} value={text} />
-        <button onClick={handleClick}> Add </button>
+        <button onClick={handleAdd}> Add </button>
       </div>
     </div>
   );
