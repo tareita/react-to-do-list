@@ -23,6 +23,17 @@ function App() {
     setTasks(newTasks);
   }
 
+  function handleToggleEdit(id) {
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, editing: !task.editing };
+      } else {
+        return task;
+      }
+    });
+    setTasks(newTasks);
+  }
+
   return (
     <div className="App">
       <h1 class="title"> To do list </h1>
@@ -32,7 +43,10 @@ function App() {
           <li key={index}>
             {task.text}
             <button onClick={() => handleDelete(task.id)}> X </button>
-            <button> edit </button>
+            <button onclick={() => handleToggleEdit(task.id)}> edit </button>
+            {task.editing && (
+              <input type="text" label="Write your edited task here :D" />
+            )}
           </li>
         ))}
       </ul>
