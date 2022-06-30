@@ -4,7 +4,7 @@ import { useState } from "react";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState("");
-  let counter = 0;
+  const [count, setCount] = useState(0);
 
   function handleChange(e) {
     const inputText = e.target.value;
@@ -12,8 +12,8 @@ function App() {
   }
 
   function handleAdd() {
-    const task = { text: text, id: counter, editing: false };
-    counter++;
+    const task = { text: text, id: count, editing: false };
+    setCount(count + 1);
     setText("");
     setTasks([...tasks, task]);
   }
@@ -32,6 +32,7 @@ function App() {
           <li key={index}>
             {task.text}
             <button onClick={() => handleDelete(task.id)}> X </button>
+            <button> edit </button>
           </li>
         ))}
       </ul>
