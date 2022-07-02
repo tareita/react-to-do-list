@@ -52,27 +52,38 @@ function App() {
               onClick={() => handleDelete(task.id)}
             >
               {" "}
-              X{" "}
+              <i class="bi bi-xbox"></i>{" "}
             </button>
             <button
               className="btn btn-primary btn-sm"
               onClick={() => handleToggleEdit(task.id)}
             >
               {" "}
-              edit{" "}
+              <i class="bi bi-pen"></i>{" "}
             </button>
             {task.editing && (
               <div>
-                <br />
-                <input
-                  type="text"
-                  placeholder="Write your edited task here :D"
-                  onChange={() => handleEditTextChange(task.id)}
-                  value={editText[task.id]}
-                />
-                <button onClick={() => handleSubmitEdit(task.id)}>
-                  submit
-                </button>
+                <div
+                  className="input-group mb-3 mt-3"
+                  style={{ width: "300px" }}
+                >
+                  <input
+                    type="text"
+                    placeholder="Write your edited task here :D"
+                    onChange={() => handleEditTextChange(task.id)}
+                    value={editText[task.id]}
+                    className="form-control"
+                    aria-describedby="button-addon2"
+                  />
+                  <button
+                    className="btn btn-outline-secondary"
+                    onClick={() => handleSubmitEdit(task.id)}
+                    type="button"
+                    id="button-addon2"
+                  >
+                    <i class="bi bi-hammer"></i>
+                  </button>
+                </div>
               </div>
             )}
           </li>
