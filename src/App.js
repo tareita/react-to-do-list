@@ -5,6 +5,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState("");
   const [count, setCount] = useState(0);
+  const [editText, setEditText] = useState({});
 
   function handleChange(e) {
     const inputText = e.target.value;
@@ -34,27 +35,70 @@ function App() {
     setTasks(newTasks);
   }
 
+  function handleSubmitEdit(id) {}
+
+  function handleEditTextChange(id) {}
+
   return (
-    <div className="App">
+    <div className="App p-3">
       <h1 class="title"> To do list </h1>
 
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>
+          <li key={index} class="mb-2">
             {task.text}
-            <button onClick={() => handleDelete(task.id)}> X </button>
-            <button onclick={() => handleToggleEdit(task.id)}> edit </button>
+            <button
+              class="btn btn-danger mx-2 btn-sm"
+              onClick={() => handleDelete(task.id)}
+            >
+              {" "}
+              X{" "}
+            </button>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() => handleToggleEdit(task.id)}
+            >
+              {" "}
+              edit{" "}
+            </button>
             {task.editing && (
-              <input type="text" label="Write your edited task here :D" />
+              <div>
+                <br />
+                <input
+                  type="text"
+                  placeholder="Write your edited task here :D"
+                  onChange={() => handleEditTextChange(task.id)}
+                  value={editText[task.id]}
+                />
+                <button onClick={() => handleSubmitEdit(task.id)}>
+                  submit
+                </button>
+              </div>
             )}
           </li>
         ))}
       </ul>
 
       <div>
-        <div> Add to list: </div>
-        <input type="text" onChange={handleChange} value={text} />
-        <button onClick={handleAdd}> Add </button>
+        <div className="mb-2"> Add to list: </div>
+        <div className="input-group mb-3" style={{ width: "300px" }}>
+          <input
+            type="text"
+            onChange={handleChange}
+            value={text}
+            className="form-control"
+            aria-describedby="button-addon2"
+          />
+          <button
+            className="btn btn-outline-secondary"
+            onClick={handleAdd}
+            type="button"
+            id="button-addon2"
+          >
+            {" "}
+            Add{" "}
+          </button>
+        </div>
       </div>
     </div>
   );
