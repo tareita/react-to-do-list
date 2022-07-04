@@ -26,7 +26,7 @@ function App() {
   function handleToggleEdit(id) {
     const newTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, editing: !task.editing, editText: text };
+        return { ...task, editing: !task.editing, editText: task.text };
       } else {
         return task;
       }
@@ -34,7 +34,16 @@ function App() {
     setTasks(newTasks);
   }
 
-  function handleSubmitEdit(id) {}
+  function handleSubmitEdit(id) {
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, text: task.editText, editing: false };
+      } else {
+        return task;
+      }
+    });
+    setTasks(newTasks);
+  }
 
   function handleEditTextChange(e, id) {
     const editText = e.target.value;
