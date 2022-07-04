@@ -5,7 +5,6 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState("");
   const [count, setCount] = useState(0);
-  const [editText, setEditText] = useState({});
 
   function handleChange(e) {
     const inputText = e.target.value;
@@ -13,7 +12,7 @@ function App() {
   }
 
   function handleAdd() {
-    const task = { text: text, id: count, editing: false };
+    const task = { text: text, id: count, editing: false, editText: "" };
     setCount(count + 1);
     setText("");
     setTasks([...tasks, task]);
@@ -27,7 +26,7 @@ function App() {
   function handleToggleEdit(id) {
     const newTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, editing: !task.editing };
+        return { ...task, editing: !task.editing, editText: text };
       } else {
         return task;
       }
@@ -37,7 +36,17 @@ function App() {
 
   function handleSubmitEdit(id) {}
 
-  function handleEditTextChange(id) {}
+  function handleEditTextChange(e, id) {
+    const editText = e.target.value;
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, editText: editText };
+      } else {
+        return task;
+      }
+    });
+    setTasks(newTasks);
+  }
 
   return (
     <div className="App p-3">
@@ -70,8 +79,8 @@ function App() {
                   <input
                     type="text"
                     placeholder="Write your edited task here :D"
-                    onChange={() => handleEditTextChange(task.id)}
-                    value={editText[task.id]}
+                    onChange={(e) => handleEditTextChange(e, task.id)}
+                    value={task.editText}
                     className="form-control"
                     aria-describedby="button-addon2"
                   />
