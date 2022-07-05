@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import Task from "./components/Task";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -63,48 +64,14 @@ function App() {
 
       <ul>
         {tasks.map((task, index) => (
-          <li key={index} class="mb-2">
-            {task.text}
-            <button
-              class="btn btn-danger mx-2 btn-sm"
-              onClick={() => handleDelete(task.id)}
-            >
-              {" "}
-              <i class="bi bi-xbox"></i>{" "}
-            </button>
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={() => handleToggleEdit(task.id)}
-            >
-              {" "}
-              <i class="bi bi-pen"></i>{" "}
-            </button>
-            {task.editing && (
-              <div>
-                <div
-                  className="input-group mb-3 mt-3"
-                  style={{ width: "300px" }}
-                >
-                  <input
-                    type="text"
-                    placeholder="Write your edited task here :D"
-                    onChange={(e) => handleEditTextChange(e, task.id)}
-                    value={task.editText}
-                    className="form-control"
-                    aria-describedby="button-addon2"
-                  />
-                  <button
-                    className="btn btn-outline-secondary"
-                    onClick={() => handleSubmitEdit(task.id)}
-                    type="button"
-                    id="button-addon2"
-                  >
-                    <i class="bi bi-hammer"></i>
-                  </button>
-                </div>
-              </div>
-            )}
-          </li>
+          <Task
+            key={index}
+            task={task}
+            handleDelete={handleDelete}
+            handleToggleEdit={handleToggleEdit}
+            handleEditTextChange={handleEditTextChange}
+            handleSubmitEdit={handleSubmitEdit}
+          />
         ))}
       </ul>
 
