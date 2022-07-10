@@ -32,6 +32,8 @@ const Task = (props) => {
             <button
               className="btn btn-outline-secondary"
               onClick={() => props.handleSubmitEdit(props.task.id)}
+              onKeyPr={() => props.handleKeyDown(this)}
+              tabIndex="0"
               type="button"
               id="button-addon2"
             >

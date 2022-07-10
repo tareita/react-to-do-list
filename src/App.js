@@ -58,6 +58,13 @@ function App() {
     setTasks(newTasks);
   }
 
+  function handleKeyDown() {
+    if (Event.key === "Enter") {
+      console.log("enter pressed");
+      handleAdd();
+    }
+  }
+
   return (
     <div className="App p-3">
       <h1 class="title"> To do list </h1>
@@ -71,6 +78,7 @@ function App() {
             handleToggleEdit={handleToggleEdit}
             handleEditTextChange={handleEditTextChange}
             handleSubmitEdit={handleSubmitEdit}
+            handleKeyDown={handleKeyDown}
           />
         ))}
       </ul>
