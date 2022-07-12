@@ -26,7 +26,6 @@ const Task = (props) => {
               placeholder="Write your edited task here :D"
               onChange={(e) => props.handleEditTextChange(e, props.task.id)}
               value={props.task.editText}
-              onKeyDown={props.handleKeyDown}
               className="form-control"
               aria-describedby="button-addon2"
             />
