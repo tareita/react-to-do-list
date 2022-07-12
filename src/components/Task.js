@@ -26,13 +26,13 @@ const Task = (props) => {
               placeholder="Write your edited task here :D"
               onChange={(e) => props.handleEditTextChange(e, props.task.id)}
               value={props.task.editText}
+              onKeyDown={props.handleKeyDown}
               className="form-control"
               aria-describedby="button-addon2"
             />
             <button
               className="btn btn-outline-secondary"
               onClick={() => props.handleSubmitEdit(props.task.id)}
-              onKeyPr={() => props.handleKeyDown(this)}
               tabIndex="0"
               type="button"
               id="button-addon2"

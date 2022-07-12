@@ -58,9 +58,9 @@ function App() {
     setTasks(newTasks);
   }
 
-  function handleKeyDown() {
-    if (Event.key === "Enter") {
-      console.log("enter pressed");
+  function handleKeyDown(e) {
+    console.log(e);
+    if (e.key === "Enter") {
       handleAdd();
     }
   }
@@ -92,6 +92,7 @@ function App() {
             value={text}
             className="form-control"
             aria-describedby="button-addon2"
+            onKeyDown={handleKeyDown}
           />
           <button
             className="btn btn-outline-secondary"
